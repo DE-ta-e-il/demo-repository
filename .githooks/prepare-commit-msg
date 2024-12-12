@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+if [ -z "$BRANCHES_TO_SKIP" ]; then
+| BRANCHES_TO_SKIP=(main master develop release hotfix)
+fi
+
+PROJECT_ID=TDET
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+BRANCH_NAME="${BRANCH_NAME##*/}"
+JIRA_ID=$(echo "$BRANCH_NAME" | egrep -o "$PROJECT_ID-[0-9]+")
+
+BRANCH_EXCLUDED=$(printf "%s\n" "${BRANCHES_TO_SKIP[@]}" | grep -c "^$BRANCH
+
+COMMIT_MSG_HEAD=$(head -n 1 "$1")
+PREFIX=$(echo "$COMMIT_MSG_HEAD" | cut -d: -f1)
+REMAINING_MSG=$(echo "$COMMIT_MSG_HEAD" | cut -d: -f2- | sed 's/^ //')
+
+if [ -n "$JIRA_ID" ] && ! [[ $BRANCH_EXCLUDED -eq 1 ]] && [[ "$COMMIT_MSG_HE
+| sed -i.bak -e "1s/^$COMMIT_MSG_HEAD/$PREFIX: $JIRA_ID $REMAINING_MSG/" "$1
+fi
