@@ -15,4 +15,5 @@ hooks:
 	@echo "Installing Git hooks..."
 	pre-commit install
 	pre-commit install --hook-type commit-msg
+	git config --unset-all core.hooksPath
 	@echo "✅ Git hooks installed."
