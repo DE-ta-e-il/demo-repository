@@ -13,7 +13,7 @@ set-perms:
 
 hooks:
 	@echo "Installing Git hooks..."
+	git config --unset-all core.hooksPath
 	pre-commit install
 	pre-commit install --hook-type commit-msg
-	git config --unset-all core.hooksPath
 	@echo "✅ Git hooks installed."
