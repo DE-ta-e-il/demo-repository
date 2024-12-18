@@ -16,4 +16,4 @@ repos:
         language: system
         stages: [commit-msg]
 ci:
-    autofix_prs: fals
+    autofix_prs: false
