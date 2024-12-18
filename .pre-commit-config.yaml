@@ -15,3 +15,5 @@ repos:
         entry: ./scripts/add-ticket-number.sh
         language: system
         stages: [commit-msg]
+ci:
+    autofix_prs: fals
